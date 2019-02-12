@@ -1,0 +1,18 @@
+<div class="container-fluid">
+
+  <form #f="ngForm">
+    <div *ngFor="let field of formFields" class="form-group col-sm-10">
+      <label class="form-control-label" for={{field.id}}> {{field.label}} </label>
+      <input type="text" class="form-control" name={{field.id}} ngModel *ngIf="field.type.name=='string'">
+      <input type="checkbox" name={{field.id}} ngModel *ngIf="field.type.name=='boolean'">
+      <input type="number" name={{field.id}} ngModel *ngIf="field.type.name=='long'">
+      <select name="field.id" *ngIf="field.type.name=='enum'">
+        <option *ngFor="let val of enumValues" value={{val}}>
+          {{field.type.values[val]}}
+        </option>
+      </select>
+    </div>
+    <button (click)="loginUser(f.value, f)"> Login </button>
+
+  </form>
+</div>
