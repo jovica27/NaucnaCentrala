@@ -36,7 +36,7 @@ public class DOIIndexing implements JavaDelegate {
  	
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        System.out.println("indeksiranje doia");	
+        System.out.println("indeksiranje rada i odredjivanje DOI-ja.");	
 
 	}
 }

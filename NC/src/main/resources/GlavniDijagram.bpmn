@@ -54,12 +54,11 @@
       <bpmn:outgoing>SequenceFlow_1t4f0oa</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:parallelGateway id="ExclusiveGateway_1x0c3vv">
-      <bpmn:incoming>SequenceFlow_1t4f0oa</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_17mt514</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1ned7dr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1foh7cb</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1pspb52</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1t4f0oa" sourceRef="Task_1uaqz28" targetRef="ExclusiveGateway_1x0c3vv" />
+    <bpmn:sequenceFlow id="SequenceFlow_1t4f0oa" sourceRef="Task_1uaqz28" targetRef="ExclusiveGateway_1wyyh79" />
     <bpmn:sendTask id="Task_1ql717j" name=" Slanje notifikacije uredniku" camunda:class="base.upp.nc.camunda.ScientificWorkSubmitionNotificationMainEditor">
       <bpmn:incoming>SequenceFlow_1foh7cb</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_08hbv5d</bpmn:outgoing>
@@ -168,7 +167,7 @@
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="isPaperAccepted" label="Should paper be accepted" type="boolean" />
-          <camunda:formField id="cmallChangesRequired" label="Small changes required" type="boolean" />
+          <camunda:formField id="smallChangesRequired" label="Small changes required" type="boolean" />
           <camunda:formField id="addNewReviewer" label="Get new reviewer" type="boolean" />
           <camunda:formField id="hugeChangesRequired" label="Huge changes required" type="boolean" />
         </camunda:formData>
@@ -352,7 +351,7 @@
       <bpmn:incoming>SequenceFlow_1g5f99i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_12spssa</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_17mt514" sourceRef="ReceiveTask_1tlvlex" targetRef="ExclusiveGateway_1x0c3vv" />
+    <bpmn:sequenceFlow id="SequenceFlow_17mt514" sourceRef="ReceiveTask_1tlvlex" targetRef="ExclusiveGateway_1wyyh79" />
     <bpmn:sequenceFlow id="SequenceFlow_0q66rul" sourceRef="Task_0vlfrct" targetRef="EndEvent_0knp25t" />
     <bpmn:sendTask id="Task_0vlfrct" name="Notifikuje korisnika da je odbijen jer je lose ocenjen" camunda:class="base.upp.nc.camunda.FailureBadMarksNotification">
       <bpmn:incoming>SequenceFlow_0onuvz2</bpmn:incoming>
@@ -365,6 +364,12 @@
       <bpmn:incoming>SequenceFlow_18pg191</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0q66rul</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1wyyh79">
+      <bpmn:incoming>SequenceFlow_1t4f0oa</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_17mt514</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ned7dr</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1ned7dr" sourceRef="ExclusiveGateway_1wyyh79" targetRef="ExclusiveGateway_1x0c3vv" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="publishProcess">
@@ -416,17 +421,17 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0ep9bl1_di" bpmnElement="SequenceFlow_0ep9bl1">
         <di:waypoint x="1160" y="632" />
-        <di:waypoint x="1250" y="632" />
+        <di:waypoint x="1339" y="632" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_198trhm_di" bpmnElement="Task_1uaqz28">
-        <dc:Bounds x="1250" y="592" width="100" height="80" />
+        <dc:Bounds x="1339" y="592" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ParallelGateway_1g86cjx_di" bpmnElement="ExclusiveGateway_1x0c3vv">
         <dc:Bounds x="1691" y="607" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1t4f0oa_di" bpmnElement="SequenceFlow_1t4f0oa">
-        <di:waypoint x="1350" y="632" />
-        <di:waypoint x="1691" y="632" />
+        <di:waypoint x="1439" y="632" />
+        <di:waypoint x="1545" y="632" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="SendTask_17ssi1m_di" bpmnElement="Task_1ql717j">
         <dc:Bounds x="1775" y="505" width="100" height="80" />
@@ -774,9 +779,8 @@
       <bpmndi:BPMNEdge id="SequenceFlow_17mt514_di" bpmnElement="SequenceFlow_17mt514">
         <di:waypoint x="2797" y="747" />
         <di:waypoint x="2797" y="414" />
-        <di:waypoint x="1616" y="414" />
-        <di:waypoint x="1616" y="621" />
-        <di:waypoint x="1702" y="621" />
+        <di:waypoint x="1573" y="414" />
+        <di:waypoint x="1570" y="606" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0q66rul_di" bpmnElement="SequenceFlow_0q66rul">
         <di:waypoint x="3578" y="1731" />
@@ -791,6 +795,13 @@
       <bpmndi:BPMNShape id="EndEvent_1qovhy3_di" bpmnElement="EndEvent_0knp25t">
         <dc:Bounds x="3560" y="1589" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1wyyh79_di" bpmnElement="ExclusiveGateway_1wyyh79" isMarkerVisible="true">
+        <dc:Bounds x="1545" y="607" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ned7dr_di" bpmnElement="SequenceFlow_1ned7dr">
+        <di:waypoint x="1595" y="632" />
+        <di:waypoint x="1691" y="632" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

@@ -21,7 +21,7 @@ public class SubCheck implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
     	//TODO: for now just check if subscription entry exists later check dates.
     	Long authorId = Long.parseLong(execution.getVariable("authorId").toString());
-    	Subscription subscription = subscriptionRepository.findOneByUser(authorId);
+    	Subscription subscription = subscriptionRepository.findOneByUserId(authorId).orElse(null);
     	if(subscription != null) {
             execution.setVariable("isSubscriptionPayed", true);
     	}else {

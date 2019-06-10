@@ -72,6 +72,8 @@ public class MagazineController {
 		variables.put("mainEditorId", magazine.getMainEditor().getId().toString());
 		variables.put("magazineTitle", magazine.getName());
 		runtimeService.startProcessInstanceByKey("publishProcess", variables);
+		//runtimeService.startProcessInstanceByKey("publishScientificPaper", variables);
+
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

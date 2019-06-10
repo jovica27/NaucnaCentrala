@@ -12,13 +12,13 @@ export class FormComponent implements OnInit {
   taskId: any;
   reviewerForm: boolean = false;
   public reviewerIds;
-
+  public isChecked = true;
   constructor(private taskService: TasksService, private router: Router) {}
 
   ngOnInit() {
     var retrievedObject = localStorage.getItem("form");
     this.form = JSON.parse(retrievedObject);
-    if (this.form[0].id === "reviewerId") {
+    if (this.form[0].id === "reviewer") {
       this.reviewerForm = true;
     }
     this.taskId = localStorage.getItem("taskId");
