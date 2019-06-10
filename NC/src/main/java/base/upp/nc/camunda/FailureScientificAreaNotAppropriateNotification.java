@@ -3,16 +3,14 @@ package base.upp.nc.camunda;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 import base.upp.nc.domain.User;
-import base.upp.nc.service.EmailService;
 import base.upp.nc.service.MailService;
 import base.upp.nc.service.UserService;
 
 @Component
-public class FailureNotification implements JavaDelegate {
+public class FailureScientificAreaNotAppropriateNotification implements JavaDelegate {
     
 	@Autowired
 	private UserService userService;
@@ -25,8 +23,8 @@ public class FailureNotification implements JavaDelegate {
     	
     	Long authorId = Long.parseLong(execution.getVariable("authorId").toString());
     	User author = userService.findById(authorId);
-    	String mailSubject = "Reject scientific work";
-    	String mailContent = "We are sorry, your scientific wrok is rejected.";
+    	String mailSubject = "Scientific work rejected";
+    	String mailContent = "We are sorry, your scientific wrok is rejected because scientific area of paper is not covered by magazine";
     	notificationService.sendEmail(mailSubject, mailContent, author.getEmail());
 
 	}

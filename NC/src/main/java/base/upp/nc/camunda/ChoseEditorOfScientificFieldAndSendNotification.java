@@ -9,7 +9,7 @@ import base.upp.nc.domain.Magazine;
 import base.upp.nc.repository.MagazineRepository;
 
 @Component
-public class ChoseEditorOfScientificField implements JavaDelegate {
+public class ChoseEditorOfScientificFieldAndSendNotification implements JavaDelegate {
     
     @Autowired
     private MagazineRepository magazineRepository;
