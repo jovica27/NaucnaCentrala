@@ -280,15 +280,36 @@ public class Load implements ApplicationRunner {
 		u5.setTitle(null);
 		u5.setScientificAreas(null);
 		
-		List<Authority> authorities5 = new ArrayList<Authority>();
-		Authority a5 = new Authority();
-		a5.setName(UserRole.REVIEWER);
-		authoritiesRepository.save(a5);
-		
-		authorities4.add(authoritiesRepository.getOne(5l));
-		u5.setAuthorities(authorities5);
+//		List<Authority> authorities5 = new ArrayList<Authority>();
+//		Authority a5 = new Authority();
+//		a5.setName(UserRole.REVIEWER);
+//		authoritiesRepository.save(a5);
+//		
+//		authorities4.add(authoritiesRepository.getOne(5l));
+		u5.setAuthorities(authorities4);
 		
 		userRepository.save(u5);
+		
+	User u6 = new User();
+		
+	u6.setCity("Nis");
+	u6.setEmail("petar@gmail.com");
+	u6.setPassword(passwordEncoder1.encode("555"));
+	u6.setFirstName("Petar");
+	u6.setLastName("Recenzent");
+	u6.setState("Srbija");
+	u6.setTitle(null);
+	u6.setScientificAreas(null);
+		
+//		List<Authority> authorities6 = new ArrayList<Authority>();
+//		Authority a6 = new Authority();
+//		a6.setName(UserRole.REVIEWER);
+//		authoritiesRepository.save(a6);
+//		
+//		authorities6.add(authoritiesRepository.getOne(6l));
+		u6.setAuthorities(authorities4);
+		
+		userRepository.save(u6);
 		
 	}
 
@@ -296,7 +317,7 @@ public class Load implements ApplicationRunner {
 
 		Magazine m1 = new Magazine();
 		
-		m1.setName("National geographic");
+		m1.setName("Deadly machines");
 		m1.setISSN(11111111);
 		m1.setPaymentType(PaymentType.OPENACCESS);
 		m1.setPrice((double)3);
@@ -321,7 +342,7 @@ public class Load implements ApplicationRunner {
 		
 		Set<User> editorsOfSpecialAreas = new HashSet<User>();
 
-		editorsOfSpecialAreas.add(userRepository.getOne((long)3));
+		editorsOfSpecialAreas.add(userRepository.getOne((long)2));
 		
 		m1.setEditorsOfSpecificAreas(editorsOfSpecialAreas);
 		
@@ -329,7 +350,7 @@ public class Load implements ApplicationRunner {
 		
 		Magazine m2 = new Magazine();
 		
-		m2.setName("Mathematicians of Europe");
+		m2.setName("Hunt gear");
 		m2.setISSN(79);
 		m2.setPaymentType(PaymentType.SUBSCRIPTION);
 		m2.setPrice((double)2);
@@ -342,7 +363,7 @@ public class Load implements ApplicationRunner {
 		List<ScientificArea> scientificAreas2 = new ArrayList<ScientificArea>();
 		
 		reviewers2.add(userRepository.getOne((long)4));
-		editorsOfSpecialAreas2.add(userRepository.getOne((long)3));
+		editorsOfSpecialAreas2.add(userRepository.getOne((long)2));
 		scientificAreas2.add(scientificAreaRepository.getOne((long)2));
 		
 		m2.setReviewers(reviewers2);

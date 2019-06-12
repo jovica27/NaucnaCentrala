@@ -11,6 +11,7 @@ export class TasksComponent implements OnInit {
   tasks: any;
   form: any;
   taskID: any;
+  accordionMap = new Map<string, boolean>();
 
   constructor(private taskService: TasksService, private router: Router) {}
 
@@ -18,6 +19,9 @@ export class TasksComponent implements OnInit {
     this.taskService.getAll().subscribe(
       data => {
         this.tasks = data;
+        this.tasks.forEach(element => {
+          this.accordionMap[element.id] = false;
+        });
       },
       error => console.log(error)
     );
