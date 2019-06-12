@@ -107,6 +107,15 @@ public class RESTService {
 							isVariable=true;
 							break;
 						}
+					}
+					else if(taskName.equals("Urednik odlucuje sta dalje sa radom")) {
+						if(!key.equals("isPaperAccepted") 
+						&& !key.equals("smallChangesRequired")
+						&& !key.equals("addNewReviewer")
+						&& !key.equals("hugeChangesRequired")) {
+							isVariable=true;
+							break;
+						}
 					}else if(taskName.equals("Reviewing process")) {
 						if(!key.equals("review")) {
 							isVariable=true;

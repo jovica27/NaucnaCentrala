@@ -323,7 +323,7 @@
       <bpmn:incoming>SequenceFlow_11ivsfy</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_04yctaz</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="ReceiveTask_0hd5dk0" name="Autor popravlja rad, vidi komentare(bez info o recez.) ponovo prilaze pdf" camunda:assignee="${authorId}">
+    <bpmn:userTask id="ReceiveTask_0hd5dk0" name="Autor popravlja rad" camunda:assignee="${authorId}">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="content" label="Content" type="string" />

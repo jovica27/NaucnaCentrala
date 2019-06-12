@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { TasksService } from "../tasks/tasks.service";
 import { Router } from "@angular/router";
+import { UploadService } from "../../services/upload.service";
+import { HttpResponse, HttpEventType } from "@angular/common/http";
 
 @Component({
   selector: "app-form",
@@ -13,7 +15,15 @@ export class FormComponent implements OnInit {
   reviewerForm: boolean = false;
   public reviewerIds;
   public isChecked = true;
-  constructor(private taskService: TasksService, private router: Router) {}
+  selectedFiles: FileList;
+  currentFileUpload: File;
+  progress: { percentage: number } = { percentage: 0 };
+
+  constructor(
+    private taskService: TasksService,
+    private router: Router,
+    private uploadService: UploadService
+  ) {}
 
   ngOnInit() {
     var retrievedObject = localStorage.getItem("form");
@@ -37,5 +47,33 @@ export class FormComponent implements OnInit {
       .subscribe((res: any) => {
         this.router.navigate(["/tasks"]);
       });
+  }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload(formUpload) {
+    this.progress.percentage = 0;
+
+    this.currentFileUpload = this.selectedFiles.item(0);
+
+    this.uploadService
+      .pushFileToStorage(this.currentFileUpload, this.taskId)
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress.percentage = Math.round(
+            (100 * event.loaded) / event.total
+          );
+        } else if (event instanceof HttpResponse) {
+          console.log("File is completely uploaded!");
+        }
+      });
+
+    this.selectedFiles = undefined;
+  }
+
+  public download() {
+    this.uploadService.downloadPaper(this.taskId);
   }
 }

@@ -19,6 +19,7 @@ import { TasksComponent } from "./camunda/tasks/tasks.component";
 import { FormComponent } from "./camunda/task-form/form.component";
 import { TasksService } from "./camunda/tasks/tasks.service";
 import { ConfigServiceService } from "./services/config-service.service";
+import { UploadService } from "./services/upload.service";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ConfigServiceService } from "./services/config-service.service";
     AuthService,
     AuthGuard,
     ConfigServiceService,
+    UploadService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

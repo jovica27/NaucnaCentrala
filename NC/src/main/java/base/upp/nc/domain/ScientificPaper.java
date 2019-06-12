@@ -11,7 +11,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +35,18 @@ public class ScientificPaper {
 	
 	private String abstractDescription;
 	
+	@Transient
+	@Lob
+	private MultipartFile[] textPDF;
+	
+	public MultipartFile[] getTextPDF() {
+		return textPDF;
+	}
+
+	public void setTextPDF(MultipartFile[] textPDF) {
+		this.textPDF = textPDF;
+	}
+
 	@Lob
 	private String pdf;
 	
@@ -66,6 +81,22 @@ public class ScientificPaper {
 		this.title = title;
 		this.keywords = keywords;
 		this.abstractDescription = abstractDescription;
+		this.pdf = pdf;
+		this.coAuthors = coAuthors;
+		this.scientificArea = scientificArea;
+		this.author = author;
+		this.magazine = magazine;
+	}
+
+	public ScientificPaper(Long id, @NotEmpty String title, String keywords, String abstractDescription,
+			MultipartFile[] textPDF, String pdf, Set<User> coAuthors, ScientificArea scientificArea, User author,
+			Magazine magazine) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.keywords = keywords;
+		this.abstractDescription = abstractDescription;
+		this.textPDF = textPDF;
 		this.pdf = pdf;
 		this.coAuthors = coAuthors;
 		this.scientificArea = scientificArea;
