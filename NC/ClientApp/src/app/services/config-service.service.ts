@@ -10,6 +10,6 @@ export class ConfigServiceService {
   constructor() {}
 
   public get baseCamundaUrl(): string {
-    return this.restApiUrl;
+    return this.javaApiUrl;
   }
 }

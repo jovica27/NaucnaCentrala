@@ -13,11 +13,12 @@ export class FormComponent implements OnInit {
   form: any;
   taskId: any;
   reviewerForm: boolean = false;
-  public reviewerIds;
   public isChecked = true;
   selectedFiles: FileList;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 };
+  availableReviewers = [];
+  selectedReviewers = [];
 
   constructor(
     private taskService: TasksService,
@@ -29,6 +30,11 @@ export class FormComponent implements OnInit {
     var retrievedObject = localStorage.getItem("form");
     this.form = JSON.parse(retrievedObject);
     if (this.form[0].id === "reviewer") {
+      this.form.forEach(element => {
+        if (element.type.name === "reviewertype") {
+          this.availableReviewers.push(element);
+        }
+      });
       this.reviewerForm = true;
     }
     this.taskId = localStorage.getItem("taskId");
@@ -41,7 +47,8 @@ export class FormComponent implements OnInit {
   }
 
   submitReviewers() {
-    let body = { reviewers: this.reviewerIds.split(",") };
+    console.log(this.selectedReviewers);
+    let body = { reviewers: this.selectedReviewers };
     this.taskService
       .executeTaskReviewers(body, this.taskId)
       .subscribe((res: any) => {

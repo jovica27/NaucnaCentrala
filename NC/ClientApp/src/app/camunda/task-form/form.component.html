@@ -2,7 +2,11 @@
   <form #f="ngForm">
     <div *ngFor="let field of form">
       <div class="form-group">
-        <label for="{{ field.id }}">{{ field.label }}</label>
+        <label
+          *ngIf="field.type.name !== 'info' && field.type.name !== 'download'"
+          for="{{ field.id }}"
+          >{{ field.label }}</label
+        >
 
         <input
           type="text"
@@ -32,7 +36,39 @@
           </option>
         </select>
       </div>
+      <div *ngIf="field.type.name == 'upload'">
+        <div class="upload-btn-wrapper" style="margin-top:30px;">
+          <button class="btn">Upload a file</button>
+          <input type="file" (change)="selectFile($event)" name="myfile" />
+        </div>
+
+        <div class="flex-col-c p-t-170 p-b-40">
+          <div
+            *ngIf="currentFileUpload"
+            class="progress-bar progress-bar-info progress-bar-striped"
+            role="progressbar"
+            attr.aria-valuenow="{{ progress.percentage }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: progress.percentage + '%' }"
+          >
+            {{ progress.percentage }}%
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn" style="margin-bottom: 30px;">
+          <button
+            type="button"
+            (click)="upload(f.value)"
+            class="login100-form-btn"
+          >
+            Upload paper
+          </button>
+        </div>
+        <!-- [disabled]="!formUpload.valid" -->
+      </div>
     </div>
+
     <button
       class="btn btn-primary"
       style="width:100%"
@@ -40,43 +76,43 @@
     >
       Submit
     </button>
-    <div class="upload-btn-wrapper" style="margin-top:30px;">
-      <button class="btn">Upload a file</button>
-      <input type="file" (change)="selectFile($event)" name="myfile" />
-    </div>
-
-    <div class="flex-col-c p-t-170 p-b-40">
-      <div
-        *ngIf="currentFileUpload"
-        class="progress-bar progress-bar-info progress-bar-striped"
-        role="progressbar"
-        attr.aria-valuenow="{{ progress.percentage }}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        [ngStyle]="{ width: progress.percentage + '%' }"
-      >
-        {{ progress.percentage }}%
-      </div>
-    </div>
-
-    <div class="container-login100-form-btn" style="margin-bottom: 30px;">
-      <button type="button" (click)="upload(f.value)" class="login100-form-btn">
-        Upload paper
-      </button>
-    </div>
-    <!-- [disabled]="!formUpload.valid" -->
-
-    <!-- download butto-->
-    <div class="container-login100-form-btn" style="margin-bottom: 30px;">
-      <button type="button" class="login100-form-btn" (click)="download()">
-        Download paper
-      </button>
-    </div>
   </form>
 </div>
 <div *ngIf="reviewerForm">
   <div class="form-group">
-    <input type="text" [(ngModel)]="reviewerIds" class="form-control" />
+    <ng-select
+      [items]="availableReviewers"
+      [hideSelected]="true"
+      multiple="true"
+      bindValue="id"
+      bindLabel="label"
+      [(ngModel)]="selectedReviewers"
+    >
+    </ng-select>
     <button class="btn btn-primary" (click)="submitReviewers()">Submit</button>
   </div>
 </div>
+
+<h4>
+  Additional informations
+  <div *ngFor="let field of form">
+    <div *ngIf="field.type.name == 'info'">
+      <label for="{{ field.id }}">{{ field.label }}</label>
+
+      <input type="text" class="form-control" [value]="field.value" disabled />
+      <!-- {{ field.value }} -->
+    </div>
+
+    <!-- download button-->
+    <div
+      *ngIf="field.type.name == 'download'"
+      class="container-login100-form-btn"
+      style="margin-bottom: 30px;"
+    >
+      <!-- <label for="{{ field.id }}">{{ field.label }}</label> -->
+      <button type="button" class="login100-form-btn" (click)="download()">
+        Download paper
+      </button>
+    </div>
+  </div>
+</h4>

@@ -48,7 +48,7 @@ public class Magazine {
 	@ManyToMany
 	private Set<User> reviewers;
 	
-	// recenzenti
+	// urednici oblasti
 	@JoinTable(name ="magazine_editors")
 	@ManyToMany
 	private Set<User> editorsOfSpecificAreas;

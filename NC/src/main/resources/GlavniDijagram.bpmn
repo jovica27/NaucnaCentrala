@@ -138,11 +138,6 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isScientificAreaAppropriate}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:userTask id="ReceiveTask_1tlvlex" name="Autor treba da ispravi rad" camunda:assignee="${authorId}">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="content" label="Content" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0uba55c</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_17mt514</bpmn:outgoing>
     </bpmn:userTask>
@@ -260,7 +255,6 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${hugeChangesRequired &amp;&amp; changesNotGood}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0tayvi4" sourceRef="UserTask_0mchvsz" targetRef="UserTask_04hf9zx" />
-    <bpmn:sequenceFlow id="SequenceFlow_1811w3g" sourceRef="UserTask_06xu8su" targetRef="UserTask_0mchvsz" />
     <bpmn:sequenceFlow id="SequenceFlow_1y0hcxs" sourceRef="UserTask_04hf9zx" targetRef="ExclusiveGateway_18faa86" />
     <bpmn:sequenceFlow id="SequenceFlow_1tzkps4" name="Dodatni recezent" sourceRef="ExclusiveGateway_18faa86" targetRef="UserTask_06xu8su">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${addNewReviewer}</bpmn:conditionExpression>
@@ -326,9 +320,8 @@
     <bpmn:userTask id="ReceiveTask_0hd5dk0" name="Autor popravlja rad" camunda:assignee="${authorId}">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="content" label="Content" type="string" />
           <camunda:formField id="changes" label="Changes" type="string" />
-          <camunda:formField id="Reply" label="Replay to reviewrs" type="string" />
+          <camunda:formField id="Reply" label="Replay to reviewers" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_18zgiqh</bpmn:incoming>
@@ -370,6 +363,7 @@
       <bpmn:outgoing>SequenceFlow_1ned7dr</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_1ned7dr" sourceRef="ExclusiveGateway_1wyyh79" targetRef="ExclusiveGateway_1x0c3vv" />
+    <bpmn:sequenceFlow id="SequenceFlow_1811w3g" sourceRef="UserTask_06xu8su" targetRef="UserTask_0mchvsz" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="publishProcess">
@@ -625,10 +619,6 @@
         <di:waypoint x="3608" y="1108" />
         <di:waypoint x="3608" y="1260" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1811w3g_di" bpmnElement="SequenceFlow_1811w3g">
-        <di:waypoint x="3022" y="1108" />
-        <di:waypoint x="3351" y="1108" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1y0hcxs_di" bpmnElement="SequenceFlow_1y0hcxs">
         <di:waypoint x="3558" y="1300" />
         <di:waypoint x="2969" y="1300" />
@@ -778,9 +768,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_17mt514_di" bpmnElement="SequenceFlow_17mt514">
         <di:waypoint x="2797" y="747" />
-        <di:waypoint x="2797" y="414" />
-        <di:waypoint x="1573" y="414" />
-        <di:waypoint x="1570" y="606" />
+        <di:waypoint x="2797" y="469" />
+        <di:waypoint x="1570" y="469" />
+        <di:waypoint x="1570" y="607" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0q66rul_di" bpmnElement="SequenceFlow_0q66rul">
         <di:waypoint x="3578" y="1731" />
@@ -801,6 +791,10 @@
       <bpmndi:BPMNEdge id="SequenceFlow_1ned7dr_di" bpmnElement="SequenceFlow_1ned7dr">
         <di:waypoint x="1595" y="632" />
         <di:waypoint x="1691" y="632" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1811w3g_di" bpmnElement="SequenceFlow_1811w3g">
+        <di:waypoint x="3022" y="1108" />
+        <di:waypoint x="3351" y="1108" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

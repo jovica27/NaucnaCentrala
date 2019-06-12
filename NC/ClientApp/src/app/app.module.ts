@@ -20,6 +20,7 @@ import { FormComponent } from "./camunda/task-form/form.component";
 import { TasksService } from "./camunda/tasks/tasks.service";
 import { ConfigServiceService } from "./services/config-service.service";
 import { UploadService } from "./services/upload.service";
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,13 @@ import { UploadService } from "./services/upload.service";
     TasksComponent,
     FormComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgSelectModule
+  ],
   providers: [
     MagazinesService,
     TasksService,
